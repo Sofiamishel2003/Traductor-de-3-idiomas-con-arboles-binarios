@@ -36,6 +36,7 @@ public class Controlador {
             spanish.insert(values[1], lista_esp);
             french.insert(values[2], lista_fra);
         } //ya está el arbol binario creado de cada uno en in order
+        Find_idioma buscador= new Find_idioma();
         int e=0;
         while (e!=5)
         {
@@ -47,7 +48,29 @@ public class Controlador {
                     System.out.println("La traducción es: ");
                     archivos archivito =new archivos();
                     ArrayList<String> lineas_lectura= archivito.read_file("texto.txt"); //lee las lineas para traducir
-                    System.out.println(lineas_lectura);
+                    int cont=0;
+                    for (String i : lineas_lectura)
+                    {
+                        cont+=1;
+                        System.out.println("Traducciones de la linea No."+cont+"-----------");
+                        String idioma=buscador.Find(i, english, spanish, french);
+                        String sinsignos = i.replaceAll("[.,;]", "");
+                        if (idioma.equals("Ingles"))
+                        {
+                            traductor gringo = new traductor(english, "Español", "Ingles");
+                            gringo.traducir(sinsignos);
+                        }
+                        else if (idioma.equals("Español"))
+                        {
+                            traductor español = new traductor(spanish, "Ingles", "Frances");
+                            español.traducir(sinsignos);
+                        }
+                        else if (idioma.equals("Frances"))
+                        {
+                            traductor oioi = new traductor(french, "Ingles", "Español");
+                            oioi.traducir(sinsignos);
+                        }
+                    }
                     break;
                 case 2:
                     System.out.println("El arbol de ingles es: ");

@@ -18,7 +18,7 @@ public class traductor {
     {
         traduccion1="";
         traduccion2="";
-        valores= oracion.split("");
+        valores= oracion.split(" ");
         for (String i : valores)
         {
             if (arbol.containsKey(i))
